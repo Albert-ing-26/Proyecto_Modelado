@@ -1,184 +1,846 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* App.css - Professional Clinical Theme Styles */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+/* --- Animations --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-#center {
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Common UI Components --- */
+.spinner {
+  border: 3px solid #f3f3f3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-left-color: #0ea5e9;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.pendiente {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.completada {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge.cancelada {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* --- 1. Login & Register Views --- */
+.clinical-auth-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 20px;
+}
+
+.clinical-auth-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 480px;
+  max-width: 100%;
+  padding: 40px;
+  border: 1px solid #e0f2fe;
+}
+
+.clinical-brand {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.medical-icon {
+  font-size: 44px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.clinical-brand h2 {
+  color: #0369a1;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.clinical-brand p {
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.clinical-auth-card h3 {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Forms */
+.clinical-form {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  gap: 18px;
 }
 
-#next-steps {
+.form-group {
   display: flex;
-  border-top: 1px solid var(--border);
+  flex-direction: column;
+  gap: 6px;
   text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
+.form-group input,
+.form-group select {
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #1e293b;
+  outline: none;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+  background: #ffffff;
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  background: #f1f5f9;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
+}
+
+/* Buttons */
+.clinical-btn {
+  height: 46px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.clinical-btn.primary {
+  background: #0ea5e9;
+  color: #ffffff;
+}
+
+.clinical-btn.primary:hover:not(:disabled) {
+  background: #0284c7;
+}
+
+.clinical-btn.success {
+  background: #10b981;
+  color: #ffffff;
+  margin-top: 15px;
+}
+
+.clinical-btn.success:hover:not(:disabled) {
+  background: #059669;
+}
+
+.clinical-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Auth toggle link */
+.clinical-auth-toggle {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.link-btn {
+  background: transparent;
+  border: none;
+  color: #0ea5e9;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+  color: #0284c7;
+}
+
+/* Demo Shortcuts Grid */
+.demo-shortcuts {
+  margin-top: 35px;
+  border-top: 1px dashed #cbd5e1;
+  padding-top: 25px;
+  text-align: left;
+}
+
+.demo-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.demo-grid {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.demo-card-btn {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  transition: all 0.2s ease;
 }
 
-.ticks {
-  position: relative;
+.demo-card-btn strong {
+  font-size: 13px;
+  color: #1e293b;
+}
+
+.demo-card-btn span {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.demo-card-btn:hover {
+  background: #e0f2fe;
+  border-color: #bae6fd;
+}
+
+.demo-card-btn.admin:hover {
+  background: #fef3c7;
+  border-color: #fde68a;
+}
+
+/* Auth messages */
+.clinical-error-msg {
+  background-color: #fee2e2;
+  border-left: 4px solid #ef4444;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* --- 2. Dashboard Shell Layout --- */
+.clinical-dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+}
+
+/* Navbar */
+.clinical-nav {
+  background-color: #0f172a;
+  color: #ffffff;
+  height: 70px;
+  padding: 0 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.clinical-nav.admin-nav {
+  background-color: #0369a1;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-brand h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.nav-user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.clinical-logout-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.clinical-logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+}
+
+/* Main Layout Grid */
+.clinical-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 30px;
+  padding: 4% 4%;
+  flex-grow: 1;
+  max-width: 1400px;
   width: 100%;
+  margin: 0 auto;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+@media (max-width: 1024px) {
+  .clinical-layout {
+    grid-template-columns: 1fr;
   }
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+.clinical-section {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.clinical-section h2 {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 25px;
+  font-weight: 700;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 12px;
+}
+
+/* Banner alerts inside panels */
+.clinical-success-banner {
+  background-color: #dcfce7;
+  border-left: 4px solid #10b981;
+  color: #065f46;
+  padding: 14px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.clinical-error-banner {
+  background-color: #fee2e2;
+  border-left: 4px solid #ef4444;
+  color: #7f1d1d;
+  padding: 14px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* --- 3. Patient Dashboard Specifics --- */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #64748b;
+}
+
+.empty-state p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.empty-state span {
+  font-size: 14px;
+  margin-top: 8px;
+  display: block;
+}
+
+/* Appointment Cards */
+.appointments-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.appointment-card {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  border-left-width: 6px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.appointment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.appointment-card.status-pendiente {
+  border-left-color: #fbbf24;
+}
+
+.appointment-card.status-completada {
+  border-left-color: #34d399;
+}
+
+.appointment-card.status-cancelada {
+  border-left-color: #f87171;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-specialty {
+  font-weight: 700;
+  color: #0369a1;
+  font-size: 16px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.app-doctor {
+  font-weight: 500;
+  color: #334155;
+  font-size: 15px;
+}
+
+.app-time {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 10px;
+  margin-top: 5px;
+}
+
+.cancel-app-btn {
+  background: transparent;
+  border: 1px solid #f87171;
+  color: #ef4444;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-app-btn:hover {
+  background-color: #fee2e2;
+}
+
+/* Hours Selection Grid */
+.hours-selection-group {
+  text-align: left;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hours-selection-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.no-hours-msg {
+  background: #f8fafc;
+  color: #d97706;
+  border: 1px solid #fde68a;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.hours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+  gap: 10px;
+}
+
+.hour-slot-btn {
+  height: 38px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hour-slot-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.hour-slot-btn.selected {
+  background: #0ea5e9;
+  border-color: #0ea5e9;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.35);
+}
+
+/* --- 4. Admin Dashboard Specifics --- */
+.admin-layout {
+  max-width: 1400px;
+  width: 100%;
+  padding: 40px 4%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.admin-controls-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 25px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.controls-title h2 {
+  font-size: 20px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.controls-title p {
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.datepicker-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.datepicker-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.admin-date-input {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1e293b;
+  outline: none;
+}
+
+.admin-date-input:focus {
+  border-color: #0369a1;
+  box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.15);
+}
+
+/* Table Card */
+.admin-schedule-table-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  padding: 30px;
+  text-align: left;
+}
+
+.table-loading-container {
+  text-align: center;
+  padding: 60px 0;
+  color: #64748b;
+}
+
+.table-empty-state {
+  text-align: center;
+  padding: 65px 20px;
+  color: #64748b;
+}
+
+.table-empty-state p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.table-empty-state span {
+  font-size: 14px;
+  margin-top: 8px;
+  display: block;
+}
+
+/* Table grid styles */
+.responsive-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-appointments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.admin-appointments-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.admin-appointments-table td {
+  padding: 14px 18px;
+  font-size: 14px;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-appointments-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.admin-appointments-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.admin-appointments-table tr.row-status-cancelada td {
+  opacity: 0.7;
+}
+
+.cell-time {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.cell-doctor {
+  font-weight: 500;
+  color: #0284c7;
+}
+
+.cell-patient {
+  font-weight: 600;
+}
+
+.cell-email {
+  color: #64748b;
+}
+
+.table-summary-info {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 15px;
+  font-size: 14px;
+  color: #64748b;
+  text-align: right;
+}
+
+.table-summary-info strong {
+  color: #0f172a;
+}
+
+.dashboard-footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  margin-top: auto;
+}
+
+/* ========================================
+   MODAL DE CONFIRMACIÓN DE CANCELACIÓN
+   ======================================== */
+
+.clinical-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOverlay 0.2s ease;
+}
+
+@keyframes fadeOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.clinical-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 36px 32px;
+  max-width: 460px;
+  width: 90%;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  animation: slideUpModal 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUpModal {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-warning-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.clinical-modal h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.clinical-modal p {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.clinical-modal p strong {
+  color: #0f172a;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Botones del sistema */
+.clinical-btn {
+  padding: 11px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clinical-btn:active {
+  transform: scale(0.97);
+}
+
+.clinical-btn.danger {
+  background: #dc2626;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+}
+
+.clinical-btn.danger:hover {
+  background: #b91c1c;
+}
+
+.clinical-btn.secondary {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.clinical-btn.secondary:hover {
+  background: #e2e8f0;
 }
